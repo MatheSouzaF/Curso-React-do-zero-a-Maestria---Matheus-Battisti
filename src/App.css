@@ -40,3 +40,13 @@
 .read-the-docs {
   color: #888;
 }
+.text {
+  text-transform: capitalize;
+}
+.flex {
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+  gap: 1rem;
+}

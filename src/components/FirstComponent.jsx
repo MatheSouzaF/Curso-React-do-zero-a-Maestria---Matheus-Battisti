@@ -1,8 +1,17 @@
+import MyComponent from "./MyComponent";
 const FirstComponent = () => {
+  const name = "Matheus";
+
+  const data = {
+    age: 28,
+    job: "developer",
+  };
+
   return (
     <div>
-      <h1>Matheus</h1>
-      <p>This is the first component of our React application.</p>
+      <h1>Meu nome é {name}</h1>
+      <p className="text">My job is {data.job}</p>
+      <MyComponent />
     </div>
   );
 };
