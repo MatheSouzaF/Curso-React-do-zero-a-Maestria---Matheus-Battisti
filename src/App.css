@@ -50,3 +50,11 @@
   align-items: center;
   gap: 1rem;
 }
+.red-title {
+  font-size: 2rem;
+  color: red;
+}
+.title {
+  font-size: 2rem;
+  color: #646cff;
+}
