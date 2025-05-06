@@ -1,9 +1,26 @@
+html,
 body {
+  height: 100%;
+}
+body {
+  font-family: Helvetica, sans-serif;
   margin: 0;
   padding: 0;
-  font-family: Helvetica, sans-serif;
-  padding-bottom: 200px;
+  background: #4b6cb7;
+  background: -webkit-linear-gradient(to bottom, #182848, #4b6cb7);
+  background: linear-gradient(to bottom, #182848, #4b6cb7);
+  color: #fff;
 }
-h1 {
-  color: red;
+button {
+  background: #4b6cb7;
+  color: #fff;
+  border: none;
+  padding: 10px 20px;
+  font-size: 1.2rem;
+  cursor: pointer;
+  transition: 0.6s;
+  border-radius: 5px;
+}
+button:hover {
+  background: rgb(62, 89, 153);
 }

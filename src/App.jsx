@@ -1,21 +1,99 @@
-import { useState } from "react";
-import reactLogo from "./assets/react.svg";
-import viteLogo from "/vite.svg";
+//  CSS
 import "./App.css";
-import Forms from "./components/Forms";
+
+// React
+import { useCallback, useEffect, useState } from "react";
+
+// Data
+import { wordsList } from "./data/words";
+// Components
+import StartScreen from "./components/StartScreen";
+import Game from "./components/Game";
+import GameOver from "./components/GameOver";
+
+const stages = [
+  { id: 0, name: "start" },
+  { id: 1, name: "game" },
+  { id: 2, name: "end" },
+];
+
 function App() {
+  const [gameStage, setGameStage] = useState(stages[0].name);
+  const [words] = useState(wordsList);
+
+  const [pickedWord, setPickedWord] = useState("");
+  const [pickedCategory, setPickedCategory] = useState("");
+  const [letters, setLetters] = useState([]);
+
+  const [guessedLetters, setGuessedLetters] = useState([]);
+  const [wrongLetters, setWrongLetters] = useState([]);
+  const [guesses, setGuesses] = useState(3);
+  const [score, setScore] = useState(0);
+
+  const pickWordAndCategory = () => {
+    // pick random category
+    const categories = Object.keys(words);
+    const category =
+      categories[Math.floor(Math.random() * Object.keys(categories).length)];
+
+    console.log(category);
+
+    // pick random word
+    const word =
+      words[category][Math.floor(Math.random() * words[category].length)];
+    console.log(word);
+
+    return {
+      word,
+      category,
+    };
+  };
+
+  // Start the secret word game
+  const startGame = () => {
+    // pick word and pick category
+    const { word, category } = pickWordAndCategory();
+
+    // create an array of letters
+    let wordLetters = word.split("");
+    wordLetters = wordLetters.map((l) => l.toLowerCase());
+
+    console.log(word, category);
+    console.log(wordLetters);
+    // set states
+    setPickedWord(word);
+    setPickedCategory(category);
+    setLetters(wordLetters);
+    setGameStage(stages[1].name);
+  };
+
+  // process the letter input
+  const verifyLetter = (letter) => {
+    console.log(letter);
+  };
+
+  // restart the game
+  const restartGame = () => {
+    setGameStage(stages[0].name);
+  };
+
   return (
-    <>
-      <h1>Forms</h1>
-      <Forms
-        user={{
-          name: "matheus",
-          email: "matheus@gmail.com",
-          bio: "advogado",
-          role: "admin",
-        }}
-      />
-    </>
+    <div className="App">
+      {gameStage === "start" && <StartScreen startGame={startGame} />}
+      {gameStage === "game" && (
+        <Game
+          verifyLetter={verifyLetter}
+          pickedWord={pickedWord}
+          pickedCategory={pickedCategory}
+          letters={letters}
+          guessedLetters={guessedLetters}
+          wrongLetters={wrongLetters}
+          guesses={guesses}
+          score={score}
+        />
+      )}
+      {gameStage === "end" && <GameOver restartGame={restartGame} />}
+    </div>
   );
 }
 
